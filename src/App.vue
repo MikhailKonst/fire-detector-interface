@@ -1,6 +1,5 @@
 <template>
-	<h1 class="title">Детектор огня</h1>
-	<div id="app">
+	<div class="app">
 		<CheckHealth :messageTypes="messageTypes" />
 		<FireDetection :messageTypes="messageTypes" />
 	</div>
@@ -28,22 +27,29 @@ onMounted(loadMessageTypes);
 <style lang="scss" scoped>
 @import './styles/main.scss';
 
-.title {
-	margin: 1%;
-	color: rgba(100, 95, 95, 0.711);
-}
-
-#app {
-	width: 40%;
-	height: 500px;
-	display: flex;
-	align-items: center;
-	flex-direction: column;
-	font-family: sans-serif;
-	background-color: #fdfdfd;
-	margin: 1%;
+.app {
 	padding: 20px;
-	border: $all-border-width solid $all-border-color;
-	border-radius: $all-border-radius;
+	margin: 0 auto;
+	max-width: fit-content;
+	width: 100%;
+	border: $border-width solid $color-border;
+	border-radius: $border-radius;
+	box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+	background-color: $color-bg;
+	font-family: $font-stack;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+
+	@media (max-width: 768px) {
+		padding: 15px;
+		max-width: 90%;
+	}
+
+	@media (max-width: 480px) {
+		padding: 10px;
+		max-width: 100%;
+	}
 }
 </style>

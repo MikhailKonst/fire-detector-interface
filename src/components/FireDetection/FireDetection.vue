@@ -14,9 +14,10 @@ import { ref, computed } from 'vue';
 import { v4 as uuidv4 } from 'uuid';
 import FileUpload from './FileUpload/FileUpload.vue';
 import FireDetectionBtn from './FireDetectionBtn/FireDetectionBtn.vue';
+import type { MessageType } from '../utils/types';
 
 const props = defineProps<{
-	messageTypes: { class: string; message: string }[];
+	messageTypes: MessageType[];
 }>();
 
 const result = ref<{ type: string } | null>(null);
@@ -32,7 +33,7 @@ const message = computed(() => {
 	}
 });
 
-const resultClass = computed(() => {
+const resultClass = computed<string>(() => {
 	if (result.value?.type === 'fire') {
 		const newArr = props.messageTypes.filter((type) => type.class === 'result--fire');
 		return newArr.length > 0 ? newArr[0].class : 'result--info';
@@ -110,7 +111,17 @@ const sendRequest = async () => {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	margin: 40px 0 40px 0;
+	margin: 40px 0;
+	justify-content: center;
+	gap: 20px;
+
+	@media (max-width: 768px) {
+		gap: 15px;
+	}
+
+	@media (max-width: 480px) {
+		gap: 10px;
+	}
 }
 .result {
 	position: relative;
@@ -120,7 +131,7 @@ const sendRequest = async () => {
 	border-radius: $border-radius;
 	max-width: fit-content;
 	word-wrap: break-word;
-	font-size: 23px;
+	font-size: 1.5rem;
 	height: 40px;
 	opacity: 0.85;
 	margin: 20px 0;
@@ -135,17 +146,25 @@ const sendRequest = async () => {
 
 	&--fire {
 		background-color: #e0fde7;
-		color: #2a9b44;
+		color: $color-success;
 	}
 
 	&--no-fire {
 		background-color: #f2dee0;
-		color: #db1428;
+		color: $color-danger;
 	}
 
 	&--info {
 		background-color: #e3e3ff;
-		color: #1052ec;
+		color: $color-info;
+	}
+
+	@media (max-width: 768px) {
+		font-size: 20px;
+	}
+
+	@media (max-width: 480px) {
+		font-size: 16px;
 	}
 }
 </style>

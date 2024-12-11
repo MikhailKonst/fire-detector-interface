@@ -12,14 +12,15 @@ const emit = defineEmits<{
 
 <style lang="scss" scoped>
 @import '../../../styles/main.scss';
+
 .fire-search {
 	position: relative;
 	height: 50px;
 	padding: 0 30px;
 	color: #513d3d;
-	border: $all-border-width solid #513d3d;
+	border: $color-border solid #513d3d;
 	background-color: #fdfdfd;
-	border-radius: $all-border-radius;
+	border-radius: $border-radius;
 	user-select: none;
 	white-space: nowrap;
 	transition: all 0.05s linear;
@@ -50,8 +51,8 @@ const emit = defineEmits<{
 
 	&:hover {
 		cursor: pointer;
-		border-color: $all-border-color;
-		color: $all-border-color;
+		border-color: $color-border;
+		color: $color-border;
 
 		&:before {
 			height: calc(100% - 32px);
@@ -73,6 +74,13 @@ const emit = defineEmits<{
 		z-index: 3;
 		position: relative;
 		font-weight: 500;
+	}
+	@media (max-width: 768px) {
+		max-width: 90%;
+	}
+
+	@media (max-width: 480px) {
+		max-width: 100%;
 	}
 }
 </style>

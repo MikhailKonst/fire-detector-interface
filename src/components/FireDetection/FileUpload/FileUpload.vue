@@ -56,11 +56,11 @@ const onFileChange = (event: Event) => {
 	margin: 20px 10px 20px 0;
 
 	&:hover {
-		border-color: $all-border-color;
+		border-color: $color-border;
 	}
 
 	&--active {
-		border-color: $all-border-color;
+		border-color: $color-border;
 	}
 
 	&__input {
@@ -80,6 +80,13 @@ const onFileChange = (event: Event) => {
 		overflow: hidden;
 		text-overflow: ellipsis;
 		max-width: 90%;
+	}
+	@media (max-width: 768px) {
+		max-width: 90%;
+	}
+
+	@media (max-width: 480px) {
+		max-width: 100%;
 	}
 }
 </style>

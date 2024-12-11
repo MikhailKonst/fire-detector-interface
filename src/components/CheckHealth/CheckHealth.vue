@@ -14,14 +14,13 @@
 <script setup lang="ts">
 import { computed } from 'vue';
 import { useHealthCheck } from './useHealthCheck';
+import type { MessageType } from '../utils/types';
 
 const props = defineProps<{
-	messageTypes: { class: string; message: string }[];
+	messageTypes: MessageType[];
 }>();
-
 const { status } = useHealthCheck();
-
-const filteredMessageTypes = computed(() => {
+const filteredMessageTypes = computed<{ class: string; message: string }[]>(() => {
 	if (status.value === 'active') {
 		return props.messageTypes.filter((type) => type.class === 'health--success');
 	}
@@ -30,8 +29,7 @@ const filteredMessageTypes = computed(() => {
 </script>
 
 <style lang="scss" scoped>
-@import '../utils/variables.scss';
-
+@import '../../styles/main.scss';
 .health {
 	position: relative;
 	display: flex;
@@ -55,12 +53,19 @@ const filteredMessageTypes = computed(() => {
 
 	&--success {
 		background-color: #e0fde7;
-		color: #2a9b44;
+		color: $color-success;
 	}
 
 	&--warning {
 		background-color: #f9ebd8;
-		color: #d77417;
+		color: $color-warning;
+	}
+	@media (max-width: 768px) {
+		font-size: 20px;
+	}
+
+	@media (max-width: 480px) {
+		font-size: 16px;
 	}
 }
 </style>
